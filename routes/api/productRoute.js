@@ -4,5 +4,6 @@ const verifyRoles = require("../../middleware/verifyRoles");
 const verifyJWT = require("../../middleware/verifyJWT");
 
 router.post("/", productControllers.registerProduct);
+router.get("/", productControllers.getProducts);
 
 module.exports = router;
