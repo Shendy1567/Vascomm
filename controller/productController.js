@@ -100,6 +100,58 @@ class ProductControllers {
             });
         }
     }
+
+    async updateProduct(req, res) {
+        try {
+            const { id } = req.params;
+            const { name, category, description, price, quantity } = req.body;
+            const data = await Product.findByPk(id);
+            if (!data)
+                return res.status(404).json({
+                    code: 404,
+                    message: `Product with id: ${id} not found`,
+                    data: null,
+                });
+            const updateFields = {};
+
+            if (name) {
+                updateFields.name = name;
+            }
+
+            if (category) {
+                updateFields.category = category;
+            }
+
+            if (description) {
+                updateFields.description = description;
+            }
+
+            if (price) {
+                updateFields.price = price;
+            }
+
+            if (quantity) {
+                updateFields.quantity = quantity;
+            }
+
+            const [updateCount] = await Product.update(updateFields, {
+                where: { id },
+            });
+            if (updateCount === 1) {
+                return res.status(200).json({
+                    code: 200,
+                    message: `Product with id: ${id} successfully updated`,
+                    data: updateFields,
+                });
+            }
+        } catch (error) {
+            return res.status(500).json({
+                code: 500,
+                message: error.message,
+                data: null,
+            });
+        }
+    }
 }
 
 module.exports = new ProductControllers();
