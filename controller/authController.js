@@ -63,9 +63,10 @@ class AuthControllers {
             const userId = user.id;
             const userName = user.name;
             const userEmail = user.email;
+            const userRole = user.role;
 
             const token = jwt.sign(
-                { userId, userName, userEmail },
+                { userId, userName, userEmail, userRole },
                 process.env.TOKEN,
                 {
                     expiresIn: "1d",
