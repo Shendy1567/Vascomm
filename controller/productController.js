@@ -152,6 +152,37 @@ class ProductControllers {
             });
         }
     }
+
+    async deleteProduct(req, res) {
+        try {
+            const { id } = req.params;
+            const product = await Product.findByPk(id);
+            if (!product) {
+                return res.status(404).json({
+                    code: 404,
+                    message: `Product with id ${id} not found`,
+                    data: null,
+                });
+            }
+
+            await Product.destroy({
+                where: {
+                    id,
+                },
+            });
+            return res.status(200).json({
+                code: 200,
+                message: "Product Successfully deleted",
+                data: product,
+            });
+        } catch (error) {
+            return res.status(500).json({
+                code: 500,
+                message: error.message,
+                data: null,
+            });
+        }
+    }
 }
 
 module.exports = new ProductControllers();

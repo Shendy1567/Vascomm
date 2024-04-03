@@ -8,4 +8,7 @@ router.get("/", productControllers.getProducts);
 router.get("/:id", productControllers.getProductById);
 router.put("/:id", productControllers.updateProduct);
 
+router.use(verifyJWT);
+router.delete("/:id", verifyRoles("admin"), productControllers.deleteProduct);
+
 module.exports = router;
