@@ -39,6 +39,9 @@ module.exports = {
                 allowNull: false,
                 type: Sequelize.DATE,
             },
+            soft_delete: {
+                type: Sequelize.DATE,
+            },
         });
     },
     async down(queryInterface, Sequelize) {

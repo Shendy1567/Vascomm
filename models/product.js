@@ -22,6 +22,8 @@ module.exports = (sequelize, DataTypes) => {
         {
             sequelize,
             modelName: "Product",
+            paranoid: true,
+            deletedAt: "soft_delete",
         }
     );
     return Product;
