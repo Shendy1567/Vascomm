@@ -89,7 +89,7 @@ class AuthControllers {
 
             return res.status(200).json({
                 code: 200,
-                message: "Login Success",
+                message: `Login Success, your role is ${userRole}`,
                 data: {
                     token,
                 },
